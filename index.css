@@ -1,0 +1,443 @@
+@import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
+body, input, button, select {
+  font-family: "Play", sans-serif;
+}
+
+html, body {
+  scrollbar-color: #555 #222;
+  scrollbar-width: thin;
+}
+
+body {
+  background: #171717;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  width: 100%;
+  padding-bottom: 30px;
+  overflow-y: auto;
+  user-select: none;
+}
+
+#sync_badge {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  color: #FFF8;
+  font-size: 40px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+card {
+  border-radius: 4px;
+  background: #272727;
+  color: #eee;
+  display: inline-block;
+  margin: 10px;
+  margin-bottom: 0;
+  box-shadow: 1px 2px 2px black;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+card legend {
+  padding: 10px;
+  padding-left: 14px;
+  font-weight: bold;
+  border-radius: 7px 7px 0 0;
+  margin-bottom: 6px;
+}
+
+#add_record {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 3rem;
+  color: white;
+  background: #0d75eb;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+  user-select: none;
+}
+#categories {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #222;
+  z-index: 9;
+  color: white;
+  font-size: 1.8rem;
+}
+#categories div {
+  padding: 15px;
+}
+#categories span {
+  height: 55px;
+  display: inline-block;
+  border-radius: 100%;
+  margin-right: 10px;
+  width: 55px;
+  line-height: 55px;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid #1115;
+  color: white;
+  font-size: 25px;
+  background: #1114;
+}
+.header .icon {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#edit_wallet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  z-index: 9;
+  display: none;
+  color: white;
+}
+#edit_wallet #values {
+  margin: 10px;
+}
+#edit_wallet #values td {
+  padding: 4px;
+}
+#edit_wallet #values td.left {
+  text-align: right;
+  font-weight: bold;
+}
+#edit_wallet #values #delete {
+  background: red;
+  color: white;
+  border: 0;
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+#edit_wallet .wallet {
+  max-width: 300px;
+  margin: 10px;
+}
+
+#new_record {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #0deb0d;
+  z-index: 9;
+  display: none;
+}
+#new_record #footer {
+  position: absolute;
+  bottom: 55vh;
+  background: #1114;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+#new_record #footer div {
+  width: 48%;
+}
+#new_record #footer legend {
+  color: #FFF7;
+}
+#new_record #footer select {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+  outline: 0;
+}
+#new_record #footer option {
+  color: black;
+}
+#new_record input {
+  width: 100%;
+  background: 0;
+  outline: 0;
+  border: 0;
+  color: white;
+  padding: 10px;
+  font-size: 1.6rem;
+}
+#new_record span {
+  color: white;
+  font-size: 5rem;
+  display: inline-block;
+}
+#new_record #usd {
+  font-size: 2rem;
+  margin-left: 20px;
+}
+#new_record #screen {
+  width: 100%;
+  text-align: right;
+}
+#new_record #calculator {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: #333;
+}
+#new_record #calculator button {
+  background: transparent;
+  border: 0;
+  width: 24%;
+  height: 11vh;
+  line-height: 11vh;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.6rem;
+  color: white;
+  font-weight: 100;
+  cursor: pointer;
+}
+#new_record #calculator button.double {
+  width: 48%;
+}
+#new_record #calculator button.selected {
+  background: #0d75eb;
+}
+
+#popup {
+  width: 100%;
+  height: 0;
+  background: #0008;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+#popup #window {
+  min-width: 100px;
+  min-height: 100px;
+  background: #222;
+  color: white;
+  padding: 14px;
+}
+#popup #window .input_container {
+  background: #292929;
+  padding: 5px;
+  font-size: 1.4rem;
+  display: inline-block;
+  margin-top: 5px;
+  width: 200px;
+  overflow: hidden;
+}
+#popup #window .input_container select {
+  background: transparent;
+  border: 0;
+  color: white;
+  width: 200px;
+  padding: 5px;
+}
+#popup #window input {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 1.4rem;
+  width: 170px;
+  padding: 2px;
+}
+#popup #window input:focus {
+  outline: 0;
+}
+#popup #window #submit {
+  background: #0d75eb;
+  width: 200px;
+  margin-top: 5px;
+  padding: 3px;
+  transition: 0.3s;
+}
+.green {
+  color: #27AE60;
+}
+
+.red {
+  color: #E74C3C;
+}
+
+.yellow {
+  color: #fffc47;
+}
+
+#wallets #container {
+  margin: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.wallet {
+  color: white;
+  padding: 6px;
+  padding-left: 10px;
+  width: 47%;
+  display: inline-block;
+  background: #0e76ff;
+  /* Default Background color */
+  border-radius: 5px;
+  margin: 5px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
+  user-select: none;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 3px black inset;
+}
+.wallet#new {
+  background: transparent !important;
+  border: 1px solid #111;
+}
+.wallet .icon {
+  /* Icon */
+  height: 30px;
+}
+.wallet .title {
+  /* Title */
+  margin-left: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FFFC;
+  display: block;
+}
+.wallet .balance {
+  margin-left: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: block;
+}
+#transactions {
+  max-height: 240px;
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-color: #555 #272727;
+  scrollbar-width: thin;
+}
+#transactions .icon {
+  position: absolute;
+  font-size: 2rem;
+  line-height: 60px;
+  width: 60px;
+  text-align: center;
+  box-shadow: 0px 4px 5px #000 inset;
+  transition: 0.2s;
+  cursor: pointer;
+}
+#transactions .icon:hover {
+  filter: brightness(110%);
+}
+#transactions .right {
+  background: #52a831;
+}
+#transactions .left {
+  right: 0;
+  background: #d42929;
+}
+#transactions .transaction_container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  background: red;
+}
+#transactions .transaction {
+  padding: 10px;
+  position: absolute;
+  scrollbar-width: thin;
+  background: #272727;
+  left: 0;
+  right: 0;
+}
+#transactions .transaction .name {
+  font-size: 1.4rem;
+  color: #ddd;
+}
+#transactions .transaction .time, #transactions .transaction .category {
+  font-size: 0.8rem;
+  display: block;
+  color: #555;
+}
+#transactions .transaction .category_icon {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 1.3rem;
+  background: white;
+  border-radius: 100%;
+  display: inline-block;
+  float: left;
+  margin-right: 5px;
+}
+#transactions .transaction .category {
+  margin-left: 4px;
+}
+#transactions .transaction .time {
+  width: 90px;
+}
+#transactions .transaction .amount {
+  font-size: 1.4rem;
+}
+#details {
+  margin: 10px;
+  margin-top: 2px;
+  padding-top: 7px;
+}
+#details #balance {
+  font-size: 2rem;
+}
+
+@media (max-width: 1700px) {
+  card {
+    width: 31%;
+    min-width: 100px;
+  }
+}
+@media (max-width: 1200px) {
+  card {
+    width: 47%;
+    min-width: 100px;
+  }
+}
+@media (max-width: 700px) {
+  card {
+    width: 700px;
+    min-width: 320px;
+  }
+}
+@media (min-width: 1700px) {
+  card {
+    width: 500px;
+    min-width: 100px;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,547 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
+body, input, button, select { font-family: 'Play', sans-serif; }
+
+html, body {
+    scrollbar-color: #555 #222;
+    scrollbar-width: thin;
+}
+
+body {
+    background: #171717;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    width: 100%;
+    padding-bottom: 30px;
+    overflow-y: auto;
+    user-select: none;
+}
+
+#sync_badge {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    color: #FFF8;
+    font-size: 40px;
+    opacity: 0;
+    transition: .5s;
+}
+
+card {
+    // min-height: 140px;
+    border-radius: 4px;
+    background: #272727;
+    color: #eee;
+    display: inline-block;
+    margin: 10px;
+    margin-bottom: 0;
+    box-shadow: 1px 2px 2px black;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+card legend {
+    padding: 10px;
+    padding-left: 14px;
+    // background: #1116;
+    font-weight: bold;
+    border-radius: 7px 7px 0 0;
+    margin-bottom: 6px;
+}
+
+$add_button_size: 70px;
+#add_record {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    width: $add_button_size;
+    height: $add_button_size;
+    line-height: $add_button_size;
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    // font-weight: bold;
+    background: #0d75eb;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: .3s;
+    user-select: none;
+
+    &:hover {
+        // filter: brightness(80%);
+    }
+}
+
+#categories {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #222;
+    z-index: 9;
+    color: white;
+    font-size: 1.8rem;
+
+    div {
+        padding: 15px;
+        // border-bottom: 1px solid #111;
+    }
+
+    span {
+        height: 55px;
+        display: inline-block;
+        border-radius: 100%;
+        margin-right: 10px;
+        width: 55px;
+        line-height: 55px;
+        text-align: center;
+    }
+}
+
+
+
+
+.header {
+    border-bottom: 1px solid #1115;
+    color: white;
+    font-size: 25px;
+    background: #1114;
+
+    .icon {
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+
+#edit_wallet {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    z-index: 9;
+    display: none;
+    color: white;
+
+    #values {
+        margin: 10px;
+
+        td {
+            padding: 4px;
+
+            &.left {
+                text-align: right;
+                font-weight: bold;
+            }
+        }
+
+        #delete {
+            background: red;
+            color: white;
+            border: 0;
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    }
+
+    .wallet {
+        max-width: 300px;
+        margin: 10px;
+    }
+}
+
+#new_record {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0deb0d;
+    z-index: 9;
+    display: none;
+    // max-width: 500px;
+
+    #footer {
+        position: absolute;
+        bottom: 55vh;
+        background: #1114;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        div {
+            width: 48%;
+        }
+
+        legend {
+            color: #FFF7;
+        }
+
+        select {
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 1rem;
+            width: 100%;
+            outline: 0;
+        }
+
+        option {
+            color: black;
+        }
+    }
+
+    input {
+        width: 100%;
+        background: 0;
+        outline: 0;
+        border: 0;
+        color: white;
+        padding: 10px;
+        font-size: 1.6rem;
+    }
+
+    span {
+        color: white;
+        font-size: 5rem;
+        // font-weight: 100;
+        display: inline-block;
+    }
+    
+    #plusmin {
+        
+    }
+
+    #usd {
+        font-size: 2rem;
+        margin-left: 20px;
+    }
+
+    #screen {
+        width: 100%;
+        text-align: right;
+    }
+
+    #calculator {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: #333;
+
+        button {
+            background: transparent;
+            border: 0;
+            width: 24%;
+            height: 11vh;
+            line-height: 11vh;
+            text-align: center;
+            display: inline-block;
+            font-size: 1.6rem;
+            color: white;
+            font-weight: 100;
+            cursor: pointer;
+
+            &:hover {
+                // background: #222;
+            }
+
+            &.double {
+                width: 48%;
+            }
+
+            &.symb {
+                // background: #2a2a2a;
+            }
+
+            &.selected {
+                background: #0d75eb;
+            }
+        }
+    }
+}
+
+#popup {
+    width: 100%;
+    height: 0;
+    background: #0008;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    #window {
+        min-width: 100px;
+        min-height: 100px;
+        background: #222;
+        color: white;
+        padding: 14px;
+
+        .input_container {
+            background: #292929;
+            padding: 5px;
+            font-size: 1.4rem;
+            display: inline-block;
+            margin-top: 5px;
+            width: 200px;
+            overflow: hidden;
+
+            select {
+                background: transparent;
+                border: 0;
+                color: white;
+                width: 200px;
+                padding: 5px;
+            }
+        }
+
+        input {
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 1.4rem;
+            width: 170px;
+            padding: 2px;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        #submit {
+            background: #0d75eb;
+            width: 200px;
+            margin-top: 5px;
+            padding: 3px;
+            transition: .3s;
+
+            &:hover {
+                // filter: brightness(70%)
+            }
+        }
+    }
+}
+
+.green { color: #27AE60; }
+.red { color: #E74C3C; }
+.yellow { color: #fffc47; }
+
+#wallets {
+    #container {
+        margin: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+}
+
+.wallet {
+    color: white;
+    padding: 6px;
+    padding-left: 10px;
+    width: 47%;
+    display: inline-block;
+    background: #0e76ff; /* Default Background color */
+    border-radius: 5px;
+    margin: 5px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: .2s;
+    user-select: none;
+    box-sizing: border-box;
+    box-shadow: 1px 2px 3px black inset;
+
+    &#new {
+        background: transparent!important;
+        border: 1px solid #111;
+    }
+
+    &#new:hover {
+        // border: 2px solid #0e76ff;
+    }
+
+    .icon { /* Icon */
+        height: 30px;
+    }
+    
+    .title { /* Title */
+        margin-left: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #FFFC;
+        display: block;
+    }
+
+    .balance {
+        margin-left: 10px;
+        font-size: .8rem;
+        font-weight: bold;
+        display: block;
+    }
+
+    &:hover {
+        // filter: brightness(90%);
+    }
+}
+
+#transactions {
+    max-height: 240px;
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-color: #555 #272727;
+    scrollbar-width: thin;
+
+    .icon {
+        position: absolute;
+        // z-index: 9;
+        font-size: 2rem;
+        line-height: 60px;
+        width: 60px;
+        text-align: center;
+        box-shadow: 0px 4px 5px #000 inset;
+        transition: .2s;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(110%);
+        }
+    }
+
+    .right {
+        background: #52a831;
+    }
+
+    .left {
+        right: 0;
+        background: #d42929;
+    }
+
+    .transaction_container {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        background: red;
+    }
+
+    .transaction {
+        // display: flex;
+        // align-items: center;
+        // justify-content: space-between;
+        padding: 10px;
+        position: absolute;
+        scrollbar-width: thin;
+        background: #272727;
+        left: 0;
+        right: 0;
+
+
+        .name {
+            font-size: 1.4rem;
+            color: #ddd;
+        }
+
+        .time, .category {
+            font-size: .8rem;
+            display: block;
+            color: #555;
+        }
+
+        .category_icon {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 1.3rem;
+            background: white;
+            border-radius: 100%;
+            display: inline-block;
+            float: left;
+            margin-right: 5px;
+        }
+
+        .category {
+            margin-left: 4px;
+        }
+
+        .time {
+            width: 90px;
+        }
+
+        .amount {
+            font-size: 1.4rem;
+        }
+
+
+        &:hover {
+            // background: #1119;
+            // cursor: default;
+        }
+    }
+}
+
+#details {
+    margin: 10px;
+    margin-top: 2px;
+    padding-top: 7px;
+
+    #balance {
+        font-size: 2rem;
+    }
+}
+#balance {
+}
+
+#balance_history {
+
+    canvas {
+        // background: #999;
+    }
+}
+
+
+
+$one_wide: 700px;
+$two_wide: 1200px;
+$three_wide: 1700px;
+
+@media (max-width: $three_wide) {
+    card {
+        width: 31%;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: $two_wide) {
+    card {
+        width: 47%;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: $one_wide) {
+    card {
+        width: $one_wide;
+        min-width: 320px;
+    }
+}
+
+@media (min-width: $three_wide) {
+    card {
+        width: 500px;
+        min-width: 100px;
+    }
+}
