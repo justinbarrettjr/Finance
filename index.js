@@ -10,7 +10,7 @@ let drag_enabled = false
 
 let categories = [
     new Category('Unkown', '#7F8C8D', 'fa-question'),
-    new Category('Income', '#2ECC71', 'fa-coins'),
+    new Category('Income', '#27AE60', 'fa-coins'),
     new Category('Food', '#E67E22', 'fa-utensils'),
     new Category('Gas', '#8E44AD', 'fa-gas-pump'),
     new Category('Debt', '#E74C3C', 'fa-credit-card'),
@@ -25,14 +25,10 @@ function init() {
     $("#picker").drawrpalette().on("preview.drawrpalette",function(event,hexcolor){
         $("#wallet_editing").css('background', hexcolor)
     }).on("cancel.drawrpalette",function(event,hexcolor){
-        console.debug("cancel: " + hexcolor);
+        $("#wallet_editing").css('background', hexcolor)
     }).on("choose.drawrpalette",function(event,hexcolor){
         console.debug("choose: " + hexcolor);
-    }).on("open.drawrpalette",function(){
-        console.debug("open");
-    }).on("close.drawrpalette",function(){
-        console.debug("close");
-    });
+    })
 
 
     console.log(localStorage.wallets)
@@ -57,16 +53,25 @@ function init() {
     if(localStorage.getItem('wallets') != null){
         let arr = JSON.parse(localStorage.getItem('wallets'))
         arr.forEach(x => {
-            console.log(x)
-            let w = new Wallet({
-                name: x.name,
-                color: x.color,
-                type: x.type,
-                records: x.records,
-                balance: x.balance,
-                initial_balance: x.initial_balance
-            })
+            if(x != null){
+                let w = new Wallet({
+                    name: x.name,
+                    color: x.color,
+                    type: x.type,
+                    records: x.records,
+                    balance: x.balance,
+                    initial_balance: x.initial_balance
+                })
+            }
         })
+    }
+        
+    for(let i = 1; i < categories.length; i++){
+        let option = document.createElement('option')
+        option.value = i
+        console.log(categories[i].print_icon())
+        option.innerText = `${categories[i].name}`
+        document.querySelector('#new_record_category').append(option)
     }
 
     // new_wallet_button()
@@ -212,14 +217,45 @@ function new_wallet_button() {
 function create_wallet() {
     let w = new Wallet()
     w.edit()
-    open_popup(`#edit_wallet`)
+    edit_wallet(w)
+}
+
+function edit_wallet(wallet, func = 'open') {
+    let wallet_name = document.querySelector('#wallet_name')
+    let wallet_balance = document.querySelector('#wallet_balance')
+    let wallet_color = document.querySelector('#picker')
+    if(func == 'open'){
+        open_popup(`#edit_wallet`)
+        wallet_name.value = wallet.name
+        document.querySelector("#wallet_editing .title").innerText = wallet.name
+        wallet_balance.value = wallet.balance
+        document.querySelector("#wallet_editing .balance").innerText = parse_USD(wallet.balance)
+        wallet_color.value = wallet.color
+        $("#wallet_editing").css('background', wallet.color)
+        document.querySelector('#submit_wallet_edit').onclick = (function() {
+            edit_wallet(wallet, 'confirm')
+        })
+        document.querySelector('#delete_wallet').onclick = (function() {
+            wallet.delete()
+        })
+    }else if(func == 'confirm') {
+        wallet.name = wallet_name.value
+        wallet.balance = wallet_balance.value
+        wallet.color = wallet_color.value
+        close_popup(`#edit_wallet`)
+        wallet.update()
+    }
 }
 
 function select_all_wallets() {
+    $('#add_record').css('background', default_color)
+    $('#balance #value').css('color', 'white')
     let balance = 0
     let records = []
     wallets.forEach(wallet => {
-        balance += wallet.balance
+        console.log(wallet.balance)
+        balance += parseFloat(wallet.balance)
+        console.log(balance)
         wallet.records.forEach(record => {
             records.push(record)
         })

@@ -6,15 +6,15 @@
     <title>Blank_Title</title>
     <link rel='stylesheet' href='css_reset.min.css' />
     <link rel='stylesheet' href='index.css' />
-    <script src='localstorage.js'></script>
     <script src='all.min.js'></script> <!-- Font Awesome -->
     <script src="jquery.min.js"></script> <!-- JQuery-->
-    <script src="jquery.drawrpalette-min.js"></script>
+    <script src="jquery.drawrpalette-min.js"></script> <!-- Jquery Color Picker Plugin -->
+    <script src="chart.js"></script> <!-- Chart.js -->
+    <script src='localstorage.js'></script>
     <script src='calculator.js'></script>
     <script src='cards.js'></script>
     <script src='wallet.js'></script>
     <script src='index.js'></script>
-    <script src="chart.js"></script>
 
 </head>
 <body onload='init()' onresize='resize()'>
@@ -73,21 +73,11 @@
             <div>
                 <legend>Wallet</legend>
                 <select id='new_record_wallet'>
-                    <option value='0'>Chase</option>
-                    <option value='1'>Chime</option>
-                    <option value='2'>Cash</option>
                 </select>
             </div>
             <div>
                 <legend>Category</legend>
                 <select id='new_record_category'>
-                    <option value='1'>Income</option>
-                    <option value='2'>Food</option>
-                    <option value='3'>Gas</option>
-                    <option value='4'>Debt</option>
-                    <option value='5'>Bills</option>
-                    <option value='6'>Shopping</option>
-                    <option value='7'>Other</option>
                 </select>
             </div>
         </div>
@@ -105,17 +95,17 @@
     <div id='edit_wallet'>
         <div class='header'>
             <i class="icon fa-solid fa-x" onclick='close_popup(`#edit_wallet`)' style="font-size: 18px; position: relative; top: 2px;"></i>
-            <i id="submit_changes" class="icon fa-solid fa-check" onclick='add_record()' style="float: right"></i>
+            <i id="submit_wallet_edit" class="icon fa-solid fa-check" onclick='' style="float: right"></i>
         </div>
 
         <div id='wallet_editing' class="wallet" style="background: #0e76ff;"><i class="fa-solid fa-wallet icon"></i><div><span class="title">New Wallet</span><span class="balance">$0.00</span></div></div>
         
         <table id='values'>
-            <tr><td class='left'>Name:</td><td><input value='New Wallet' onkeyup='document.querySelector("#wallet_editing .title").innerText = this.value' /></td></tr>
-            <tr><td class='left'>Balance:</td><td><input value='0' type='number' onkeyup='document.querySelector("#wallet_editing .balance").innerText = parse_USD(this.value)' /></td></tr>
+            <tr><td class='left'>Name:</td><td><input id='wallet_name' value='New Wallet' onkeyup='document.querySelector("#wallet_editing .title").innerText = this.value' /></td></tr>
+            <tr><td class='left'>Balance:</td><td><input id='wallet_balance' value='0' type='number' onkeyup='document.querySelector("#wallet_editing .balance").innerText = parse_USD(this.value)' /></td></tr>
             <!-- <input type='color' value='#0e76ff' onchange='console.log(this)' /> -->
             <tr><td class='left'>Color:</td><td><input type="text" id ="picker" value="#0e76ff" /></td></tr>
-            <tr><td></td><td><button id='delete'><i class="fa-solid fa-trash-can"></i> Delete Wallet</button></td></tr>
+            <tr><td></td><td><button id='delete_wallet'><i class="fa-solid fa-trash-can"></i> Delete Wallet</button></td></tr>
         </table>
     </div>
 

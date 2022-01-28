@@ -41,8 +41,8 @@ function print_transactions(records) {
         <div class='icon right' onclick='open_popup("#new_record", true, "${record.name}", ${record.amount}, ${record.wallet}, ${record.category}, ${record.id}, ${record.wallet})'><i class="fa-solid fa-pen"></i></div>
 
         <div class='transaction' ontouchstart='drag_transaction_record(event, this)' ontouchend='drag_stop()' onmousedown='drag_transaction_record(event, this)' onmouseup='drag_stop()'>
-        <div class='category_icon' style='background: ${categories[record.category].color}'>
-            <i class="fa-solid ${categories[record.category].icon}"></i>
+        <div class='category_icon' style='background: #1d1d1d; color: ${categories[record.category].color}'>
+            <i class="fa-light ${categories[record.category].icon}"></i>
         </div>
         <div style='display: inline-block;'>
             <span>
@@ -66,7 +66,7 @@ function print_transactions(records) {
     }
 }
 
-function print_balance_history(records, color = 'white', initial_balance = 0) {
+function print_balance_history(records, color = default_color, initial_balance = 0) {
     document.getElementById('myChart').remove()
     let div = document.createElement('canvas')
     div.id = 'myChart'

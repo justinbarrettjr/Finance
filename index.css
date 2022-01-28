@@ -123,14 +123,15 @@ card legend {
   text-align: right;
   font-weight: bold;
 }
-#edit_wallet #values #delete {
-  background: red;
+#edit_wallet #values #delete_wallet {
+  background: #da2d2d;
   color: white;
   border: 0;
   padding: 10px;
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 5px;
+  box-shadow: 2px 2px 4px #111;
 }
 #edit_wallet .wallet {
   max-width: 300px;
@@ -149,7 +150,7 @@ card legend {
 }
 #new_record #footer {
   position: absolute;
-  bottom: 55vh;
+  top: 242px;
   background: #1114;
   width: 100%;
   padding: 10px;
@@ -197,6 +198,7 @@ card legend {
 }
 #new_record #calculator {
   position: absolute;
+  top: 300px;
   bottom: 0;
   width: 100%;
   text-align: center;
@@ -206,7 +208,7 @@ card legend {
   background: transparent;
   border: 0;
   width: 24%;
-  height: 11vh;
+  height: 20%;
   line-height: 11vh;
   text-align: center;
   display: inline-block;
@@ -312,6 +314,7 @@ card legend {
   user-select: none;
   box-sizing: border-box;
   box-shadow: 1px 2px 3px black inset;
+  -webkit-tap-highlight-color: transparent;
 }
 .wallet#new {
   background: transparent !important;
@@ -320,6 +323,7 @@ card legend {
 .wallet .icon {
   /* Icon */
   height: 30px;
+  font-size: 30px;
 }
 .wallet .title {
   /* Title */
