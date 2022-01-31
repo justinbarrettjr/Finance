@@ -6,15 +6,18 @@
     <title>Blank_Title</title>
     <link rel='stylesheet' href='css_reset.min.css' />
     <link rel='stylesheet' href='index.css' />
-    <script src='all.min.js'></script> <!-- Font Awesome -->
-    <script src="jquery.min.js"></script> <!-- JQuery-->
-    <script src="jquery.drawrpalette-min.js"></script> <!-- Jquery Color Picker Plugin -->
-    <script src="chart.js"></script> <!-- Chart.js -->
-    <script src='localstorage.js'></script>
-    <script src='calculator.js'></script>
-    <script src='cards.js'></script>
-    <script src='wallet.js'></script>
-    <script src='index.js'></script>
+    <script src='javascript/plugins/fontawesome.all.min.js'></script> <!-- Font Awesome -->
+    <script src="javascript/plugins/jquery.min.js"></script> <!-- JQuery-->
+    <script src="javascript/plugins/jquery.drawrpalette-min.js"></script> <!-- Jquery Color Picker Plugin -->
+    <script src="javascript/plugins/chart.js"></script> <!-- Chart.js -->
+    <!-- Classes -->
+    <script src='javascript/class/calculator.js'></script>
+    <script src='javascript/class/wallet.js'></script>
+    <script src='javascript/class/data.js'></script>
+    <script src='javascript/class/record.js'></script>
+
+    <script src='javascript/cards.js'></script>
+    <script src='javascript/index.js'></script>
 
 </head>
 <body onload='init()' onresize='resize()'>
@@ -28,28 +31,33 @@
     </card>
 
     <card id='balance'>
-        <legend>Actual Balance</legend>
+        <legend>Balance</legend>
         <div id='details'>
-            <span id='balance'>Balance <span id='value'>$0</span></span>
+            <span id='balance'><span id='value'>$0</span></span>
+            <canvas id="myChart"></canvas>
         </div>
     </card>
 
-    <card>
+    <div id='transactions_card'>
+    <card id="history">
         <legend>Transactions</legend>
         <div id='transactions'></div>
     </card>
-
-    <card id='balance_history'>
-        <legend>Balance History</legend>
-        <canvas id="myChart"></canvas>
-    </card>
-
-    <card id='spending'>
-        <legend>Spending</legend>
-        <div style='width: 80%; padding-bottom: 15px; margin: auto;'>
-            <canvas id="myChart2"></canvas>
+    
+    <card id='spending' style='display: none;'>
+        <legend>Statistics</legend>
+        <!-- <i id='icon' class="fa-regular fa-chart-column" onclick="toggle_spending_chart(this)"></i> -->
+        <div id='stats'>
+            <legend>Expenses</legend>
+            <div style='width: 80%; padding-bottom: 15px; margin: auto;' id='spending_chart'>
+                <canvas id="myChart2"></canvas>
+            </div>
+            <legend>CashFlow</legend>
+            <canvas id="myChart3"></canvas>
         </div>
+        <!-- <canvas id="myChart3"></canvas> -->
     </card>
+    </div>
 
 
 
@@ -116,5 +124,12 @@
     </div>
 
     <div id='add_record' onclick='open_popup(`#new_record`)'>+</div>
+
+    <footer>
+        <nav id='tab1' class='active' onclick='navigation("tab1")'><i class="fa-duotone fa-bars-staggered"></i>Records</nav>
+        <nav id='tab2' onclick='navigation("tab2")'><i class="fa-duotone fa-chart-pie"></i> Stats</nav>
+        <nav id='tab3' onclick='navigation("tab3")'><i class="fa-duotone fa-chart-bar"></i></i>Budget</nav>
+        <nav id='tab4' onclick='navigation("tab4")'><i class="fa-duotone fa-stars"></i>Goals</nav>
+    </footer>
 </body>
 </html>
